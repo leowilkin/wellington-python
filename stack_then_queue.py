@@ -2,7 +2,7 @@ class Stack:
     def __init__(self):
         self.items = []
 
-    def isEmpty(self):
+    def empty(self):
         return self.items == []
 
     def push(self, item):
@@ -16,6 +16,9 @@ class Stack:
 
     def size(self):
         return len(self.items)
+
+    def show(self):
+        print(self.items)
 
 class Queue:
     def __init__(self, maxItems):
@@ -62,15 +65,27 @@ class Queue:
             print("Nothing to remove from queue")
         return return_item
 
-s = Stack()
-myString = input("Please enter a word or phrase to be reversed: ")
-list1 = list(myString)
-print(list1)
-numChars = len(list1)
-s = Stack()
-#push the characters from the list onto the stack
-for char in list1:
-    s.push(char)
+# input the string to reverse
+input_string = input("Please enter a word or phrase to be reversed: ")
+numChars = len(input_string)
+step1_stack = Stack() # create the stack
 
-task2Queue = CircularQueue(5)
-task2Queue.show()
+# push the characters from the list onto the stack
+for char in input_string:
+    step1_stack.push(char)
+
+# make the queue for the input from stack
+step2_queue = Queue(6)
+
+# we want to use step2_queue.enqueue(input) for every record in stack
+for char in input_string:
+    step2_queue.enqueue(step1_stack.pop())
+
+step2_queue.show() # should return the queue with the string in it
+
+step3_stack = Stack() # create the step 3 stack
+
+for char in input_string:
+    step3_stack.push(step2_queue.dequeue())
+
+step3_stack.show()
