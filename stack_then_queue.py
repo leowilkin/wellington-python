@@ -75,7 +75,7 @@ for char in input_string:
     step1_stack.push(char)
 
 # make the queue for the input from stack
-step2_queue = Queue(6)
+step2_queue = Queue(len(input_string))
 
 # we want to use step2_queue.enqueue(input) for every record in stack
 for char in input_string:
